@@ -18,49 +18,121 @@ import Edit from "../Admin/Pages/AdminProfile/Edit";
 import AdminProfile from "../Admin/Pages/AdminProfile/AdminProfile";
 import Profile from "../Admin/Pages/AdminProfile/Profile";
 
-
 import CommonLayout from "../user/components/CommonLayout";
 import AboutPage from "../user/pages/AboutPage";
 import PricingPage from "../user/pages/PricingPage";
 import FeaturesPage from "../user/pages/FeaturesPage";
 import HomePage from "../user/pages/HomePage";
+import Authlayout from "../user/components/Authlayout";
+import SignupPage from "../user/authPages/SignupPage";
+import ForgotPassword from "../user/authPages/ForgotPassword";
+import VerifyComponet from "../user/authPages/VerifyComponet";
+import PasswordUpdated from "../user/authPages/PasswordUpdated";
+import SignInPage from "../user/authPages/SignInPage";
+import AccountSuccessfully from "../user/authPages/AccountSuccessfully";
+import NewUser from "../user/pages/User/NewUser";
+import NewTask from "../user/pages/User/UserPages/NewTask";
+import SearchChat from "../user/pages/User/UserPages/SearchChat";
+import Project from "../user/pages/User/UserPages/Project";
+import Library from "../user/pages/User/UserPages/Library";
+import UserProfile from "../user/pages/User/UserPages/UserProfile";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <CommonLayout/>,
+    element: <CommonLayout />,
     children: [
-        {
+      {
         path: "/",
         element: <HomePage />,
       },
+    
       {
         path: "/about",
         element: <AboutPage />,
       },
+      
+      
        {
         path: "/features",
-        element: <FeaturesPage/>,
-      }, {
+        element: <FeaturesPage />,
+      },
+      {
         path: "/pricing",
         element: <PricingPage />,
       },
-      
     ],
   },
+
+  {
+    path: "/auth",
+    element: <Authlayout />,
+    children: [
+      {
+        path: "/auth/signup",
+        element: <SignupPage />,
+      },
+      {
+        path: "/auth/forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/auth/verify",
+        element: <VerifyComponet />,
+      },
+      {
+        path: "/auth/password-updated",
+        element: <PasswordUpdated />,
+      },
+      {
+        path: "/auth/signin",
+        element: <SignInPage />,
+      },
+      {
+        path: "/auth/signIn-successful",
+        element: <AccountSuccessfully />,
+      },
+    ],},
+    {
+    path: "/user",
+    element: <NewUser></NewUser>,
+    children:[
+      {
+        path: "newtask",
+        element: <NewTask></NewTask>
+      },
+      {
+        path: "search",
+        element: <SearchChat></SearchChat>
+      },
+        {
+        path: "library",
+        element: <Library></Library>
+      },
+      {
+        path: "project",
+        element: <Project></Project>
+      },
+      {
+        path: "profile",
+        element: <UserProfile></UserProfile>
+      },
+    
+    ]
+  },
+
   {
     path: "/admin",
     element: <AdminLayout></AdminLayout>,
     children: [
-     
       {
         path: "overview",
         element: <Overview></Overview>,
       },
-       {
-        path:"login",
-        element:<AdminAuth></AdminAuth>
-       },
+      {
+        path: "login",
+        element: <AdminAuth></AdminAuth>,
+      },
       {
         path: "user",
         element: <User></User>,
@@ -104,16 +176,16 @@ const router = createBrowserRouter([
       {
         path: "adminprofile",
         element: <AdminProfile></AdminProfile>,
-        children:[
+        children: [
           {
-            index:true,
-            element:<Profile></Profile>
+            index: true,
+            element: <Profile></Profile>,
           },
           {
-            path:"editprofile",
-            element:<Edit></Edit>
-          }
-        ]
+            path: "editprofile",
+            element: <Edit></Edit>,
+          },
+        ],
       },
       //   {
       //     path:"data",
