@@ -2,11 +2,19 @@ import { createBrowserRouter } from "react-router-dom";
 
 import AdminLayout from "../Admin/layout/AdminLayout";
 import Overview from "../Admin/Pages/Overview/Overview";
+<<<<<<< HEAD
 import Workflow from "../Admin/Pages/Workflow/Workflow";
 import Usage from "../Admin/Pages/Usage&Billing/Usage";
 import Security from "../Admin/Pages/Security&Access/Security";
 import Configuration from "../Admin/Pages/SystemConfiguration/Configuration";
 import Data from "../Admin/Pages/Data&Files/Data";
+=======
+
+import Usage from "../Admin/Pages/Usage&Billing/Usage";
+
+import Configuration from "../Admin/Pages/SystemConfiguration/Configuration";
+
+>>>>>>> master
 import User from "../Admin/Pages/User/User";
 
 import APIrequests from "../Admin/Pages/Usage&Billing/Componants/APIrequests";
@@ -36,6 +44,12 @@ import SearchChat from "../user/pages/User/UserPages/SearchChat";
 import Project from "../user/pages/User/UserPages/Project";
 import Library from "../user/pages/User/UserPages/Library";
 import UserProfile from "../user/pages/User/UserPages/UserProfile";
+<<<<<<< HEAD
+=======
+import EditProfile from "../user/pages/User/UserPages/EditProfile";
+import Policy from "../user/pages/User/Policy";
+import Apikey from "../Admin/Pages/SystemConfiguration/Componants/Apikey";
+>>>>>>> master
 
 const router = createBrowserRouter([
   {
@@ -46,14 +60,23 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
       {
         path: "/about",
         element: <AboutPage />,
       },
+<<<<<<< HEAD
       
       
        {
+=======
+
+      {
+>>>>>>> master
         path: "/features",
         element: <FeaturesPage />,
       },
@@ -61,6 +84,13 @@ const router = createBrowserRouter([
         path: "/pricing",
         element: <PricingPage />,
       },
+<<<<<<< HEAD
+=======
+      {
+        path: "/policy",
+        element: <Policy></Policy>,
+      },
+>>>>>>> master
     ],
   },
 
@@ -92,6 +122,7 @@ const router = createBrowserRouter([
         path: "/auth/signIn-successful",
         element: <AccountSuccessfully />,
       },
+<<<<<<< HEAD
     ],},
     {
     path: "/user",
@@ -119,6 +150,39 @@ const router = createBrowserRouter([
       },
     
     ]
+=======
+    ],
+  },
+  {
+    path: "/user",
+    element: <NewUser></NewUser>,
+    children: [
+      {
+        path: "newtask",
+        element: <NewTask></NewTask>,
+      },
+      {
+        path: "search",
+        element: <SearchChat></SearchChat>,
+      },
+      {
+        path: "library",
+        element: <Library></Library>,
+      },
+      {
+        path: "project",
+        element: <Project />,
+      },
+      {
+        path: "profile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "editprofile",
+        element: <EditProfile></EditProfile>,
+      },
+    ],
+>>>>>>> master
   },
 
   {
@@ -137,10 +201,14 @@ const router = createBrowserRouter([
         path: "user",
         element: <User></User>,
       },
+<<<<<<< HEAD
       // {
       //   path:"workflow",
       //   element: <Workflow></Workflow>
       // },
+=======
+
+>>>>>>> master
       {
         path: "usage",
         element: <Usage></Usage>,
@@ -155,10 +223,14 @@ const router = createBrowserRouter([
           },
         ],
       },
+<<<<<<< HEAD
       // {
       //   path:"security",
       //   element: <Security></Security>
       // },
+=======
+
+>>>>>>> master
       {
         path: "configuration",
         element: <Configuration></Configuration>,
@@ -171,6 +243,13 @@ const router = createBrowserRouter([
             path: "key",
             element: <Key></Key>,
           },
+<<<<<<< HEAD
+=======
+          {
+            path: "addapikey",
+            element: <Apikey></Apikey>,
+          },
+>>>>>>> master
         ],
       },
       {
@@ -187,10 +266,13 @@ const router = createBrowserRouter([
           },
         ],
       },
+<<<<<<< HEAD
       //   {
       //     path:"data",
       //     element: <Data></Data>
       //   }
+=======
+>>>>>>> master
     ],
   },
 ]);
