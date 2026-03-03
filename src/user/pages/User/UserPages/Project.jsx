@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-export default function Project() {
-  return (
-    <div>Project</div>
-  )
-=======
 import { FiSearch, FiX } from "react-icons/fi";
 import { Link } from "react-router";
 import { TbShoppingBagPlus } from "react-icons/tb";
@@ -65,5 +57,4 @@ export default function Project({ onClose }) {
       </div>
     </div>
   );
->>>>>>> master
 }

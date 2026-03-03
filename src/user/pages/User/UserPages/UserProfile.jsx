@@ -1,13 +1,3 @@
-<<<<<<< HEAD
- import React from 'react'
- 
- export default function UserProfile() {
-   return (
-     <div>Profile</div>
-   )
- }
- 
-=======
 import { FiX, FiEdit2, FiLogOut } from "react-icons/fi";
 import { Link } from "react-router";
 
@@ -90,4 +80,3 @@ export default function UserProfile({ onClose }) {
     </div>
   );
 }
->>>>>>> master

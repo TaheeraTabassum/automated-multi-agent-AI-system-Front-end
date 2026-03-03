@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 import { Link } from "react-router";
 
->>>>>>> master
 const Footer = () => {
   return (
     <footer className="font-inter text-gray-500 text-sm md:text-base">
@@ -13,16 +10,10 @@ const Footer = () => {
             <span className="text-black font-semibold">Algorithms AI</span>
           </p>
 
-<<<<<<< HEAD
-          <span className="cursor-pointer hover:text-black transition">
-            Privacy & Policy
-          </span>
-=======
          <Link to="/policy">
           <span className="cursor-pointer hover:text-black transition">
             Privacy & Policy
           </span></Link>
->>>>>>> master
         </div>
       </div>
     </footer>
