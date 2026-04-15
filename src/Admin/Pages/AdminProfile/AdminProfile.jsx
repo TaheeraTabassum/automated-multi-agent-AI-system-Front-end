@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import Form from "./Form";
 
 export default function AdminProfile({ onClose }) {
   return (
@@ -34,8 +35,10 @@ export default function AdminProfile({ onClose }) {
         Edit Profile
       </NavLink>
     </div>
+  
    <div className="lg:mx-8 my-6">
      <Outlet></Outlet>
+   
    </div>
   </div>
   );
