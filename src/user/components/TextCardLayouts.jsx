@@ -39,7 +39,7 @@ const features = [
   },
 ];
 
-const TextCardLayouts = () => {
+const TextCardLayouts = ({ enableNavigation = false }) => {
   const textareaRef = useRef(null);
 
   const handleInput = () => {
@@ -48,11 +48,15 @@ const TextCardLayouts = () => {
     el.style.height = el.scrollHeight + "px";
   };
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/user");
+    if (enableNavigation) {
+      navigate("dashboard");
+    }
   };
+
+
 
   return (
     <div className="font-inter max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ">

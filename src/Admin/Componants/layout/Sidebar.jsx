@@ -28,7 +28,12 @@ export default function Sidebar({ isOpen, onClose }) {
   ];
 
   const location = useLocation();
-  const hideSidebar = location.pathname === "/admin/login";
+  const hideSidebar = location.pathname === "/admin/login"  ||
+   location.pathname === "/admin/login" || 
+  location.pathname === "/admin/forgot-password" || 
+  location.pathname === "/admin/verify-otp" || 
+  location.pathname === "/admin/reset-password" || 
+  location.pathname === "/admin/password-changed";
   if (hideSidebar) return null;
 
   return (
@@ -44,7 +49,7 @@ export default function Sidebar({ isOpen, onClose }) {
       {/* Sidebar Container */}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-[#0D0D12] text-white transition-transform duration-300 ease-in-out md:static md:translate-x-0 border-r border-[#2B7FFF33] ${
+        className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-black text-white transition-transform duration-300 ease-in-out md:static md:translate-x-0 border-r border-[#2B7FFF33] ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

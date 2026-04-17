@@ -7,10 +7,15 @@ import AdminProfile from "../../Pages/AdminProfile/AdminProfile";
 
 export default function Header({ onMenuClick }) {
   const location = useLocation();
-  const hideSidebar = location.pathname === "/admin/login";
+  const hideSidebar  = location.pathname === "/admin/login"  ||
+   location.pathname === "/admin/login" || 
+  location.pathname === "/admin/forgot-password" || 
+  location.pathname === "/admin/verify-otp" || 
+  location.pathname === "/admin/reset-password" || 
+  location.pathname === "/admin/password-changed";
   if (hideSidebar) return null;
   return (
-    <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between lg:justify-center bg-[#13131A] border-b border-[#2B7FFF33] px-6 text-white shadow-sm">
+    <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between lg:justify-center bg-black border-b border-[#2B7FFF33] px-6 text-white shadow-sm">
       <div className="flex items-center gap-4">
         {/* Mobile Menu Button */}
         <button
@@ -34,6 +39,7 @@ export default function Header({ onMenuClick }) {
 
       {/* Right Side Actions */}
       <div className="flex  gap-2  items-center lg:mr-20">
+        
         <div className="dropdown dropdown-left">
           <div
             tabIndex={0}
@@ -49,7 +55,7 @@ export default function Header({ onMenuClick }) {
           </div>
           <ul
             tabIndex="-1"
-            className="dropdown-content menu bg-base-100 rounded-box z-1 w-96 p-6 shadow-sm"
+            className="dropdown-content menu border border-gray-400 bg-gray-500 rounded-box z-1 w-96  shadow-sm"
           >
             <Notification></Notification>
           </ul>

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import AdminLayout from "../Admin/layout/AdminLayout";
 import Overview from "../Admin/Pages/Overview/Overview";
@@ -13,7 +13,7 @@ import APIrequests from "../Admin/Pages/Usage&Billing/Componants/APIrequests";
 import Plans from "../Admin/Pages/Usage&Billing/Componants/Plans";
 import Api from "../Admin/Pages/SystemConfiguration/Componants/Api";
 import Key from "../Admin/Pages/SystemConfiguration/Componants/Key";
-import AdminAuth from "../Admin/Pages/AdminAuth";
+
 import Edit from "../Admin/Pages/AdminProfile/Edit";
 import AdminProfile from "../Admin/Pages/AdminProfile/AdminProfile";
 import Profile from "../Admin/Pages/AdminProfile/Profile";
@@ -26,10 +26,8 @@ import HomePage from "../user/pages/HomePage";
 import Authlayout from "../user/components/Authlayout";
 import SignupPage from "../user/authPages/SignupPage";
 import ForgotPassword from "../user/authPages/ForgotPassword";
-import VerifyComponet from "../user/authPages/VerifyComponet";
 import PasswordUpdated from "../user/authPages/PasswordUpdated";
 import SignInPage from "../user/authPages/SignInPage";
-import AccountSuccessfully from "../user/authPages/AccountSuccessfully";
 import NewUser from "../user/pages/User/NewUser";
 import NewTask from "../user/pages/User/UserPages/NewTask";
 import SearchChat from "../user/pages/User/UserPages/SearchChat";
@@ -40,7 +38,37 @@ import EditProfile from "../user/pages/User/UserPages/EditProfile";
 import Policy from "../user/pages/User/Policy";
 import Apikey from "../Admin/Pages/SystemConfiguration/Componants/Apikey";
 import UserDashboard from "../user/pages/User/UserPages/UserDashboard";
+import OTPVerification from "../user/authPages/OTPVerification";
+import EmailVerificationNotice from "../user/authPages/EmailVerificationNotice";
+import Login from "../Admin/Pages/AdminAuth/Login";
 
+import VerifyOTP from "../Admin/Pages/AdminAuth/VerifyOTP";
+import ResetPassword from "../Admin/Pages/AdminAuth/ResetPassword";
+import PasswordChanged from "../Admin/Pages/AdminAuth/PasswordChanged";
+import ForgotPass from "../Admin/Pages/AdminAuth/ForgotPassword";
+import UserResetPassword from "../user/authPages/UserResetPassword";
+import { tokenStorage } from "../lib/tokenStorage";
+
+const PrivateRoute = ({ children }) => {
+  const token = tokenStorage.getAccessToken();
+  const getUser = () => {
+    try {
+      return JSON.parse(localStorage.getItem("user"));
+    } catch {
+      return null;
+    }
+  };
+  const user = getUser();
+  if (!token || !user) {
+    return <Navigate to="/admin/login" />;
+  }
+
+  if (user.role !== "ADMIN") {
+    return <Navigate to="/admin/login" />;
+  }
+
+  return children;
+};
 const router = createBrowserRouter([
   {
     path: "/",
@@ -80,13 +108,29 @@ const router = createBrowserRouter([
         element: <SignupPage />,
       },
       {
+        path: "/auth/verify-otp",
+        element: <OTPVerification type="signup" />,
+      },
+      {
+        path: "/auth/verify-email-notice",
+        element: <EmailVerificationNotice />,
+      },
+      {
         path: "/auth/forgot-password",
         element: <ForgotPassword />,
       },
       {
-        path: "/auth/verify",
-        element: <VerifyComponet />,
+        path: "/auth/verify-forgot-password",
+        element: <OTPVerification type="forgot" />,
       },
+      {
+        path: "/auth/reset-password",
+        element: <UserResetPassword />,
+      },
+      // {
+      //   path: "/auth/verify",
+      //   element: <VerifyComponet />,
+      // },
       {
         path: "/auth/password-updated",
         element: <PasswordUpdated />,
@@ -95,22 +139,26 @@ const router = createBrowserRouter([
         path: "/auth/signin",
         element: <SignInPage />,
       },
-      {
-        path: "/auth/signIn-successful",
-        element: <AccountSuccessfully />,
-      },
+      // {
+      //   path: "/auth/signIn-successful",
+      //   element: <AccountSuccessfully />,
+      // },
     ],
   },
 
-  {
-   path: "/user",
-   element:<UserDashboard/>
-  },
-  
+  // {
+  //   path: "/user/userdashboar",
+  //   element: <UserDashboard />,
+  // },
+
   {
     path: "/user",
     element: <NewUser></NewUser>,
     children: [
+      {
+        path: "newtask/dashboard",
+        element: <UserDashboard />,
+      },
       {
         path: "newtask",
         element: <NewTask></NewTask>,
@@ -137,19 +185,62 @@ const router = createBrowserRouter([
       },
     ],
   },
-
+  {
+    path: "/admin/login",
+    element: <Login />,
+  },
+  {
+    path: "/admin/forgot-password",
+    element: <ForgotPass />,
+  },
+  {
+    path: "/admin/verify-otp",
+    element: <VerifyOTP />,
+  },
+  {
+    path: "/admin/reset-password",
+    element: <ResetPassword />,
+  },
+  {
+    path: "/admin/password-changed",
+    element: <PasswordChanged />,
+  },
   {
     path: "/admin",
-    element: <AdminLayout></AdminLayout>,
+    element: (
+      <PrivateRoute>
+        {" "}
+        <AdminLayout></AdminLayout>{" "}
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "overview",
         element: <Overview></Overview>,
       },
-      {
-        path: "login",
-        element: <AdminAuth></AdminAuth>,
-      },
+
+      // {
+      //   path: "login",
+      //   element: <Login />,
+      // },
+      // {
+      //   path: "forgot-password",
+      //   element: <ForgotPass/>
+      // },
+
+      // {
+      //   path: "verify-otp",
+      //   element: <VerifyOTP />,
+      // },
+      // {
+      //   path: "reset-password",
+      //   element: <ResetPassword />,
+      // },
+      // {
+      //   path: "password-changed",
+      //   element: <PasswordChanged />,
+      // },
+
       {
         path: "user",
         element: <User></User>,
@@ -204,6 +295,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
 ]);
 
 export default router;
