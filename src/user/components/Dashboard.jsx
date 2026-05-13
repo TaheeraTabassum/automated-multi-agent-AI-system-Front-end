@@ -1,15 +1,15 @@
-import dashboard from "../../assets/images/dashboard.png";
+import { SandpackPreview, SandpackLayout } from "@codesandbox/sandpack-react";
 
 const Dashboard = () => {
   return (
-    <div className="flex-1 bg-white min-h-[70vh] lg:min-h-screen">
-      <div className="max-w-3xl mx-auto w-full ">
-        {/* Title */}
-        <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 mb-3 mt-3">
-          Travel Website
-        </h2>
-        <img src={dashboard} alt="dashboard" />
-      </div>
+    <div className="w-full h-full flex flex-col flex-1">
+      <SandpackLayout style={{ height: "100%", width: "100%", flex: 1 }} className="flex-1 h-full">
+        <SandpackPreview
+          style={{ height: "100%", width: "100%", flex: 1 }}
+          showOpenInCodeSandbox={false}
+          showRefreshButton={true}
+        />
+      </SandpackLayout>
     </div>
   );
 };

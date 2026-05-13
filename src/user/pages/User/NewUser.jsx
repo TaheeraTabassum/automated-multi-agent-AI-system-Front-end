@@ -9,14 +9,15 @@ export default function NewUser() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
 
-  // Redirect to /admin/overview if the current path is exactly /admin
+  
   if (location.pathname === "/user") {
     return <Navigate to="/user/newtask" />;
   }
 
   return (
-    <div className="flex h-screen w-full bg-[#F8F8F7] text-gray-100">
-    <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    <div className=" h-full w-full  bg-[#F8F8F7] text-gray-100">
+      <div className="flex ">
+         <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
     
           <div className="flex flex-1 flex-col overflow-hidden ">
             <Header onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)} />
@@ -25,6 +26,9 @@ export default function NewUser() {
           <Outlet />
         </main>
       </div>
+      </div>
+   
     </div>
   );
+  
 }

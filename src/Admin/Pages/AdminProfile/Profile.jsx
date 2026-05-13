@@ -1,13 +1,31 @@
 import React from "react";
 import { LuEyeOff } from "react-icons/lu";
+import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { tokenStorage } from "../../../lib/tokenStorage";
+import { apiGet, getImageUrl } from "../../../lib/api";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Profile() {
   const navigate = useNavigate();
-
+const getProfile = async () => {
+  const res = await apiGet("/admin/profile")
+  return res.data;
+}
+const {data={} , isError, error} = useQuery({
+  queryKey:["profile-data"],
+  queryFn: getProfile,
+  retry: false,
+})
+if (isError){
+  return(
+    <div>
+      {error?.message}
+    </div>
+  )
+}
   const handleLogout = () => {
-    
+      
     tokenStorage.clear();
     localStorage.removeItem("user");
 
@@ -22,14 +40,15 @@ export default function Profile() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
           <div className="flex items-center gap-4">
             <img
-              src="https://i.ibb.co.com/VcWhsLp9/Ellipse-25.png"
-              alt="Profile"
-              className="h-20 w-20 rounded-full border-2 border-gray-700 object-cover"
+              src={data?.avatarUrl ? getImageUrl(data.avatarUrl) : "/default-avatar.png"}
+              alt=""
+              className="md:h-20 md:w-20 h-16 w-16 rounded-full border-2 border-gray-700 object-cover"
             />
-            <div>
-              <h2 className="text-xl font-semibold">Alexa Rawles</h2>
-              <p className="text-gray-500 text-sm">
-                alexarawles@gmail.com
+            <div >
+              <h2 className="sm:text-xl flex font-semibold">{data.firstname} <span className="ml-2">{data.lastname}</span>
+              </h2>
+              <p className="text-gray-500 text-xs sm:text-sm">
+               {data.email}
               </p>
             </div>
           </div>
@@ -41,24 +60,22 @@ export default function Profile() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">
-                Full Name
+                First Name
               </label>
-              <input
-                type="text"
-                placeholder="Alexa Rawles"
+              <div
                 className="w-full bg-[#11141b] border border-[#1e232b] rounded-xl px-4 py-3 text-sm text-gray-400"
-              />
+              >{data.firstname}
+              </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">
                 Last Name
               </label>
-              <input
-                type="text"
-                placeholder="Rawles"
+              <div
                 className="w-full bg-[#11141b] border border-[#1e232b] rounded-xl px-4 py-3 text-sm text-gray-400"
-              />
+              >{data.lastname}
+              </div>
             </div>
           </div>
 
@@ -67,33 +84,31 @@ export default function Profile() {
               <label className="text-sm font-medium text-gray-300">
                 Gender
               </label>
-              <input
-                type="text"
-                placeholder="Man"
+              <div
                 className="w-full bg-[#11141b] border border-[#1e232b] rounded-xl px-4 py-3 text-sm text-gray-400"
-              />
+              >{data.gender}
+              </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">
                 Country
               </label>
-              <input
-                type="text"
-                placeholder="USA"
+             <div
                 className="w-full bg-[#11141b] border border-[#1e232b] rounded-xl px-4 py-3 text-sm text-gray-400"
-              />
+              >{data.country}
+              </div>
             </div>
           </div>
 
-          {/* Logout Button */}
+        
           <div className="flex justify-end pt-10">
             <button
               type="button"
               onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-xl text-sm font-semibold transition"
+              className="text-red-700 hover:text-red-800 px-8 py-3 rounded-xl  font-semibold text-lg flex items-center gap-2 border border-red-800"
             >
-              Logout
+               <AiOutlineLogout /> Logout
             </button>
           </div>
 

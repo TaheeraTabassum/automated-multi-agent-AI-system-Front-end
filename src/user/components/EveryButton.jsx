@@ -80,7 +80,7 @@
 
 //           <button
 //             onClick={() => setActiveTab("publish")}
-//             className={`p-2 rounded-lg bg-black text-white cursor-pointer 
+//             className={`p-2 rounded-lg bg-black text-white cursor-pointer
 //             `}
 //           >
 //             Publish
@@ -120,20 +120,14 @@ import SettingsLayout from "./SettingsLayout";
 import Dashboard from "./Dashboard";
 import PublishPage from "./PublishPage";
 
-const EveryButton = () => {
-  const [activeTab, setActiveTab] = useState("code");
+const EveryButton = ({ onClose, activeTab, setActiveTab }) => {
 
   return (
     <>
       {/* Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-3 border-b bg-white text-black border-gray-200">
-
         {/* Left Buttons */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          <button className="p-2 rounded-lg border border-gray-200 cursor-pointer">
-            <Eye size={18} />
-          </button>
-
           <button
             onClick={() => setActiveTab("code")}
             className={`p-2 rounded-lg border border-gray-200 ${
@@ -149,10 +143,10 @@ const EveryButton = () => {
               activeTab === "dashboard" ? "bg-gray-200 border-gray-800" : ""
             }`}
           >
-            <AppWindow size={18} />
+            <Eye size={18} />
           </button>
 
-          <button
+          {/* <button
             onClick={() => setActiveTab("database")}
             className={`p-2 rounded-lg border border-gray-200 ${
               activeTab === "database" ? "bg-gray-200 border-gray-800" : ""
@@ -177,12 +171,12 @@ const EveryButton = () => {
             }`}
           >
             <Settings size={18} />
-          </button>
+          </button> */}
         </div>
 
         {/* Right Buttons */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          <button className="p-2 rounded-lg bg-gray-200 border border-gray-200 cursor-pointer">
+          {/* <button className="p-2 rounded-lg bg-gray-200 border border-gray-200 cursor-pointer">
             <Share2 size={18} />
           </button>
 
@@ -191,20 +185,18 @@ const EveryButton = () => {
             className="px-4 py-2 rounded-lg bg-black text-white text-sm sm:text-base"
           >
             Publish
-          </button>
+          </button> */}
 
-          <button className="p-2 rounded-lg bg-gray-200 border border-gray-200 cursor-pointer">
-            <X size={18} />
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg bg-gray-200 border border-gray-200 cursor-pointer hover:text-black text-gray-600 transition-colors"
+            title="Close Panel"
+          >
+            <X size={20} />
           </button>
         </div>
       </div>
 
-      {/* Pages */}
-      {activeTab === "dashboard" && <Dashboard />}
-      {activeTab === "database" && <DatabaseEmptyState />}
-      {activeTab === "folder" && <FileStorageEmptyState />}
-      {activeTab === "settings" && <SettingsLayout />}
-      {activeTab === "publish" && <PublishPage />}
     </>
   );
 };
