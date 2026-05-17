@@ -16,28 +16,7 @@ export default function Key() {
     }
   });
 
-  // const deleteMutation = useMutation({
-  //   mutationFn: (id) => apiDelete(`/admin/api-configuration/${id}`),
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(['apiKeysManagement']);
-  //     alert("API Key deleted successfully!");
-  //   },
-  //   onError: (error) => {
-  //     console.error("Delete Error:", error);
-  //     alert("Failed to delete API key");
-  //   }
-  // });
-  // const handleDelete = (id) => {
-  //   if (window.confirm("Are you sure you want to delete this API key?")) {
-  //     deleteMutation.mutate(id);
-  //   }
-  // };
 
-  
-  // const handleCopy = (text) => {
-  //   navigator.clipboard.writeText(text);
-  //   alert("Key copied to clipboard!"); 
-  // };
 
   if (isLoading) return <div className="text-center py-20 text-blue-500">Loading Keys...</div>;
   if (isError) return <div className="text-center py-20 text-red-500">Failed to load API keys</div>;
