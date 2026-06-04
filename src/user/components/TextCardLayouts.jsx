@@ -654,7 +654,7 @@ const TextCardLayouts = () => {
               <div key={idx} className="flex flex-col gap-4">
                 {msg.role === "user" ? (
                   <div className="flex gap-4 self-end max-w-[90%] sm:max-w-full">
-                    <div className=" bg-gray-100 p-4 ml-2 sm:ml-8 rounded-2xl break-all leading-tight rounded-tr-none text-gray-800 border border-gray-200 shadow-sm ">
+                    <div className=" bg-gray-100 p-4 ml-2 sm:ml-8 rounded-2xl break-words leading-tight rounded-tr-none text-gray-800 border border-gray-200 shadow-sm ">
                       {typeof msg.text === "string"
                         ? msg.text
                         : Array.isArray(msg.text)
@@ -683,7 +683,7 @@ const TextCardLayouts = () => {
                     <div className="flex-1 space-y-3 overflow-y-auto w-full">
                       {msg.output && (
                         <div className="w-full">
-                          <div className="prose prose-sm break-all leading-tight bg-blue-50/50 p-4 mr-2 sm:mr-8 rounded-xl  border border-blue-100 text-gray-600">
+                          <div className="prose prose-sm break-words leading-tight bg-blue-50/50 p-4 mr-2 sm:mr-8 rounded-xl  border border-blue-100 text-gray-600">
                             {msg.output?.type === "markdown" ? (
                               <MarkdownRenderer content={msg.output.content} />
                             ) : msg.output?.type === "structured" ? (
